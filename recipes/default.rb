@@ -7,7 +7,7 @@
 bash "clean up old code " do
   cwd node[:app][:folder]
 
-  code<<-EOH
+  code <<-EOH
   rm -rf *
   EOH
   only_if { File.exists?(node[:app][:folder])}
@@ -16,7 +16,7 @@ end
 
 bash "get latest code" do
 	cwd node[:app][:folder]
-	code<<-EOH
+	code <<-EOH
   		aws s3 sync s3://todo-deploy .
   	EOH
   only_if { File.exists?(node[:app][:folder])}
