@@ -22,11 +22,20 @@ bash "get latest code" do
   only_if { File.exists?(node[:app][:folder])}
 end
 
-bash "update the bundle" do
+bash "update the bundle " do
 
   cwd node[:app][:folder]
   code <<-EOH
       bundle update
+    EOH
+
+end
+
+bash "execute database migrations" do
+
+  cwd node[:app][:folder]
+  code <<-EOH
+      rake db:migrate
     EOH
 
 end
